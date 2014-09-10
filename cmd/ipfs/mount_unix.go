@@ -32,14 +32,12 @@ func mountCmd(c *commander.Command, inp []string) error {
 		u.POut(c.Long)
 		return nil
 	}
-	fmt.Println("wtf.")
 
 	n, err := localNode(true)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println("starting new daemon listener...")
 	dl, err := daemon.NewDaemonListener(n, "localhost:12345")
 	if err != nil {
 		return err

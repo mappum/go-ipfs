@@ -169,7 +169,8 @@ func (dht *IpfsDHT) Provide(key u.Key) error {
 	dht.providers.AddProvider(key, dht.self)
 	peers := dht.routingTables[0].NearestPeers(kb.ConvertKey(key), PoolSize)
 	if len(peers) == 0 {
-		return kb.ErrLookupFailure
+		// Early out for no targets
+		return nil
 	}
 
 	pmes := Message{
