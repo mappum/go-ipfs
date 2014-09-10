@@ -13,6 +13,7 @@ import (
 	config "github.com/jbenet/go-ipfs/config"
 	ci "github.com/jbenet/go-ipfs/crypto"
 	merkledag "github.com/jbenet/go-ipfs/merkledag"
+	"github.com/jbenet/go-ipfs/namesys"
 	path "github.com/jbenet/go-ipfs/path"
 	peer "github.com/jbenet/go-ipfs/peer"
 	routing "github.com/jbenet/go-ipfs/routing"
@@ -55,7 +56,7 @@ type IpfsNode struct {
 	Resolver *path.Resolver
 
 	// the name system, resolves paths to hashes
-	// Namesys *namesys.Namesys
+	Namesys namesys.NSResolver
 }
 
 // NewIpfsNode constructs a new IpfsNode based on the given config.
