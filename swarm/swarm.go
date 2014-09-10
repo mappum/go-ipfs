@@ -320,6 +320,7 @@ func (s *Swarm) fanIn(conn *Conn) {
 			if !ok {
 				e := fmt.Errorf("Error retrieving from conn: %v", conn.Peer.Key().Pretty())
 				s.Chan.Errors <- e
+				s.Drop(conn.Peer)
 				goto out
 			}
 
