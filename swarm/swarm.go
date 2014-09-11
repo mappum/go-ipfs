@@ -259,9 +259,9 @@ func (s *Swarm) StartConn(conn *Conn) error {
 	u.DOut("Starting connection: %s\n", conn.Peer.Key().Pretty())
 	// add to conns
 	s.connsLock.Lock()
-	if _, ok := s.conns[conn.Peer.Key()]; ok {
-		s.connsLock.Unlock()
-		return ErrAlreadyOpen
+	if oldconn, ok := s.conns[conn.Peer.Key()]; ok {
+		u.DOut("Closing existing connection.\n")
+		oldconn.Close()
 	}
 	s.conns[conn.Peer.Key()] = conn
 	s.connsLock.Unlock()

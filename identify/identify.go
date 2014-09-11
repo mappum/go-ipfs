@@ -185,6 +185,8 @@ func secureInProxy(in, secureIn chan []byte, hashType string, tIV, tCKey, tMKey 
 	for {
 		data, ok := <-in
 		if !ok {
+			u.DOut("Closing incoming proxy.\n")
+			close(secureIn)
 			return
 		}
 
@@ -220,6 +222,8 @@ func secureOutProxy(out, secureOut chan []byte, hashType string, mIV, mCKey, mMK
 	for {
 		data, ok := <-secureOut
 		if !ok {
+			u.DOut("Closing outgoing proxy.\n")
+			close(secureOut)
 			return
 		}
 

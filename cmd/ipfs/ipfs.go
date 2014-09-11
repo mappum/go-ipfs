@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/jbenet/go-ipfs/Godeps/_workspace/src/github.com/gonuts/flag"
 	"github.com/jbenet/go-ipfs/Godeps/_workspace/src/github.com/jbenet/commander"
@@ -59,6 +60,7 @@ func ipfsCmd(c *commander.Command, args []string) error {
 
 func main() {
 	u.Debug = true
+	runtime.GOMAXPROCS(2)
 	err := CmdIpfs.Dispatch(os.Args[1:])
 	if err != nil {
 		if len(err.Error()) > 0 {
